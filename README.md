@@ -3,18 +3,11 @@ An automated tools to check if your website is defaced using the keyword availab
 
 ### How To Use ### 
 
-Step: 1
-Edit the variable
-- site
-- wordlist_file
-- output_file
-- search_res
-- search_tick
-- chunk_size
-
-Step: 2
-Run the python file by typing
-
+Simply run the program by running the command
 ```
-$ python3 sentinel.py
+$ python3 sentinel.py [OPTIONS]
 ```
+
+available options:
+- -u : your domain here
+- -w : your worlist here

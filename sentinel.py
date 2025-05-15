@@ -10,7 +10,7 @@ import sys
 
 
 
-parser = argparse.ArgumentParser(description="Usage: python3 sentinel.py -u [DOMAIN] -w [WORDLIST]")
+parser = argparse.ArgumentParser(prog="pSentinel.py", usage='python3 %(prog)s [options]')
 parser.add_argument("-u", type=str, help="your domain here")    
 parser.add_argument("-w", type=str, help="your wordlist here") 
 args = parser.parse_args()                  
