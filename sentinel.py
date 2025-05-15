@@ -4,7 +4,6 @@ from googlesearch import search
 from src import banner
 from time import sleep
 import requests
-import random
 import threading as trd
 import sys
 
@@ -24,7 +23,9 @@ def split_list(input_list, chunk_size):
     return [input_list[i:i + chunk_size] for i in range(0, len(input_list), chunk_size)]
 
 def print_stats():
-    stats = f'''________________________________________
+    print(banner.b2)
+    print(f'''
+____________________________________________
                    |
 [*] Search on site | {site}
 [*] Using wordlist | {wordlist_file}
@@ -32,25 +33,19 @@ def print_stats():
 [*] Search Result  | {search_res}    
 [*] Search Tick    | {search_tick}
 [*] Word Chunk     | {chunk_size}
-___________________|____________________
-'''
-    return stats
+___________________|________________________
+''')
 
 def search_in_google(word_chunk):   
     for keyword in word_chunk:
         query = f'{domain} {keyword}'
         search_title = f"[*] searching for: {query}"
-        return search_title
         print(search_title)
 
         search_req = search(query, num_results=search_res, sleep_interval=3)
-        for result in search_req:
-            if keyword is not None:                      
-                link = f'[{keyword}]: {result}'
-                return link
-            else:
-                pass
-            sleep(search_tick)
+        for result in search_req:                    
+            link = f'[{keyword}]: {result}'
+            print(link)
         print('')
 
 # Enabling multiThread for CAPTCHA evasion
@@ -72,27 +67,21 @@ def multi_thread():
     th4.join()
 
     
-def write_output(output):
-    with open(output, 'w') as autput:
-        autput.write(banner.b1)
-        autput.write(print_stats())
-        autput.write(search_in_google(word_list))
-    
-    print(banner.b2)
-    print(print_stats())
+def write_output(word_list):
+    print_stats()
     sleep(2)
-    print(search_in_google(word_list))
-
+    search_in_google(word_list)
 
 def main():
     try:
-        write_output(output_file)
+        write_output(word_list)
     except requests.exceptions.HTTPError:
         print("")
         print("The operation is blocked by CAPTCHA :(")
     except KeyboardInterrupt:
         print("")
         print("Process terminated by user")
+    except requests.exeptions.ReadTimeout:
+        print("Request timeout")
     
-
 main()
