@@ -8,14 +8,12 @@ import argparse
 import threading as trd
 import sys
 
-
-
 parser = argparse.ArgumentParser(prog="pSentinel.py", usage='python3 %(prog)s [options]')
 parser.add_argument("-u", type=str, help="your domain here")    
 parser.add_argument("-w", type=str, help="your wordlist here") 
 args = parser.parse_args()                  
 
-### Edit This Beforehand ###
+# Important Variables
 site           = args.u
 wordlist_file  = args.w
 output_file    = "./out/out.txt"
@@ -75,7 +73,6 @@ def multi_thread():
     th3.join()
     th4.join()
 
-    
 def write_output(word_list):
     print_stats()
     sleep(2)
