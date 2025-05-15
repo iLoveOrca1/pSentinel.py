@@ -14,4 +14,7 @@ Edit the variable
 
 Step: 2
 Run the python file by typing
+
+```
 $ python3 sentinel.py
+```
