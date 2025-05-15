@@ -4,16 +4,25 @@ from googlesearch import search
 from src import banner
 from time import sleep
 import requests
+import argparse
 import threading as trd
 import sys
 
+
+
+parser = argparse.ArgumentParser(description="Usage: python3 sentinel.py -u [DOMAIN] -w [WORDLIST]")
+parser.add_argument("-u", type=str, help="your domain here")    
+parser.add_argument("-w", type=str, help="your wordlist here") 
+args = parser.parse_args()                  
+
 ### Edit This Beforehand ###
-site           = "your site here"
-wordlist_file  = "./src/wordlists.txt"
+site           = args.u
+wordlist_file  = args.w
 output_file    = "./out/out.txt"
 search_res     = 12
 search_tick    = 0
 chunk_size     = 10
+
 
 domain = f'site:{site}'
 with open(wordlist_file, 'r') as word_list:
